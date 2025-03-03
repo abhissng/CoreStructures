@@ -37,7 +37,6 @@ clean:
 	@echo "Cleaning up..."
 	@rm -f *.log
 
-
 # Help command to display available targets
 help:
 	@echo "Makefile for running build checks Go code"

@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Exit on error and pipe failure
 set -e -o pipefail
 
