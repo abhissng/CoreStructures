@@ -11,9 +11,9 @@ type Core struct {
 	User    *user.UserInformation `json:"user,omitempty"`
 	Primary *primary.PrimaryInfo  `json:"primary,omitempty"`
 	Input   *input.InputInfo      `json:"input,omitempty"`
-	Error   any                   `json:"error,omitempty"`
 }
 
+// NewCore creates a new Core instance
 func NewCore() *Core {
 	return &Core{
 		User:    user.NewUserInformation(),
@@ -21,7 +21,26 @@ func NewCore() *Core {
 		Input:   input.NewInputInfo(),
 	}
 }
-func (c *Core) AttachError(err any) *Core {
-	c.Error = err
+
+// NewNilCore creates a new Core instance
+func NewNilCore() *Core {
+	return &Core{}
+}
+
+// AttachUser attaches the given user information to the core
+func (c *Core) AttachUser(user *user.UserInformation) *Core {
+	c.User = user
+	return c
+}
+
+// AttachPrimary attaches the given primary information to the core
+func (c *Core) AttachPrimary(primary *primary.PrimaryInfo) *Core {
+	c.Primary = primary
+	return c
+}
+
+// AttachInput attaches the given input information to the core
+func (c *Core) AttachInput(input *input.InputInfo) *Core {
+	c.Input = input
 	return c
 }
