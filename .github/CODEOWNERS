@@ -1,0 +1,8 @@
+# Default code owners for the entire repository
+*       @abhissng
+
+# Example: Owners for a specific directory
+/core/  @abhissng
+
+# Example: Owners for a specific file
+README.md  @abhissng

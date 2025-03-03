@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package discovery.v1;
+
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "gen/discovery/v1;discoveryv1";
+
+// Core message structure
+message Core {
+  message UserInformation {
+    string user_id = 1;
+    string email = 2;
+    // Add other user fields as needed
+  }
+
+  message PrimaryInfo {
+    string primary_id = 1;
+    string primary_type = 2;
+    // Add primary-specific fields
+  }
+
+  message InputInfo {
+    string input_type = 1;
+    bytes input_data = 2;
+    // Add input-specific fields
+  }
+
+  UserInformation user = 1;
+  PrimaryInfo primary = 2;
+  InputInfo input = 3;
+  google.protobuf.Any error = 4;
+}
+
+// Generic Message structure
+message DiscoveryMessage {
+  string correlation_id = 1;
+  string request_id = 2;
+  google.protobuf.Any payload = 3;
+  enum Status {
+    STATUS_UNSPECIFIED = 0;
+    STATUS_PENDING = 1;
+    STATUS_COMPLETED = 2;
+    STATUS_FAILED = 3;
+  }
+  Status status = 4;
+  enum Action {
+    ACTION_UNSPECIFIED = 0;
+    ACTION_EXECUTE = 1;
+    ACTION_ROLLBACK = 2;
+  }
+  Action action = 5;
+  google.protobuf.Any error = 6;
+  google.protobuf.Timestamp timestamp = 7;
+  string current_service = 8;
+}
+
+// Service definition
+service DiscoveryService {
+  rpc ProcessDiscovery(DiscoveryMessage) returns (DiscoveryMessage);
+}
